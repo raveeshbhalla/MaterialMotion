@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/movie_name_row_height"
+    android:orientation="horizontal"
+    android:background="@color/background_material_light">
+    <ImageView
+        android:id="@+id/poster"
+        android:layout_width="@dimen/movie_name_poster_width"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/captainamerica2"/>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Captain America: The Winter Soldier"
+        android:textColor="@color/primary_text_default_material_light"
+        android:textSize="@dimen/abc_text_size_subhead_material"
+        android:layout_marginLeft="@dimen/name_poster_margin"
+        android:layout_gravity="center_vertical"/>
+</LinearLayout>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Resources</string>
+    <array name="movies">
+        <item>The Incredible Hulk</item>
+        <item>Iron Man</item>
+        <item>Iron Man 2</item>
+        <item>Thor</item>
+        <item>Captain America: The First Avenger</item>
+        <item>Avengers</item>
+        <item>Iron Man 3</item>
+        <item>Thor: The Dark World</item>
+        <item>Captain America: The Winter Soldier</item>
+        <item>Avengers: Age of Ultron</item>
+    </array>
+</resources>
