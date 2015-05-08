@@ -19,3 +19,4 @@ resources/build
 simple/proguard-rules.pro
 simple/simple.iml
 simple/build
+parallax/parallax.iml
