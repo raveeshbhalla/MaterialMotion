@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.raveesh.materialmotion" >
+    package="in.raveesh.materialmotion.simple" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ParallaxActivity"
+            android:name="in.raveesh.materialmotion.ParallaxActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImageActivity"
+            android:name="in.raveesh.materialmotion.ImageActivity"
             android:label="@string/title_activity_image" >
         </activity>
     </application>

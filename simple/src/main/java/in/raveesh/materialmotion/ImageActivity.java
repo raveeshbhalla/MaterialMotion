@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import in.raveesh.materialmotion.resources.Movie;
 import in.raveesh.materialmotion.resources.Resources;
+import in.raveesh.materialmotion.simple.R;
 
 
 public class ImageActivity extends ActionBarActivity {

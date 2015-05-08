@@ -14,6 +14,7 @@ import in.raveesh.materialmotion.resources.Movie;
 import in.raveesh.materialmotion.resources.MovieAdapter;
 import in.raveesh.materialmotion.resources.OnMovieClickListener;
 import in.raveesh.materialmotion.resources.Resources;
+import in.raveesh.materialmotion.simple.R;
 
 
 public class ParallaxActivity extends ActionBarActivity {
