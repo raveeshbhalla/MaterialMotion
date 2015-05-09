@@ -43,4 +43,9 @@ public class ImageActivity extends ActionBarActivity {
             title.setText(movie.NAME);
         }
     }
+
+    @Override
+    public void onBackPressed(){
+        finishAfterTransition();
+    }
 }
