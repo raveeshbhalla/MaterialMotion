@@ -4,4 +4,5 @@
     <dimen name="movie_name_poster_width">54dp</dimen>
     <dimen name="name_poster_margin">16dp</dimen>
     <dimen name="name_margin">16dp</dimen>
+    <dimen name="hero_height">180dp</dimen>
 </resources>

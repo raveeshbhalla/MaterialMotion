@@ -1,1 +1,1 @@
-include ':simple', ':resources'
+include ':simple', ':resources', ':parallax'
