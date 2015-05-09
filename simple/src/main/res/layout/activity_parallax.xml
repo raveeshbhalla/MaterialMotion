@@ -16,7 +16,7 @@
     <ImageView
         android:id="@+id/hero"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/hero_height"
         android:layout_below="@+id/toolbar"
         android:scaleType="centerCrop"
         android:src="@drawable/guardians"/>

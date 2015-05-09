@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ParallaxActivity">
 
-    <ImageView
-        android:id="@+id/hero"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/guardians"/>
+        android:layout_height="match_parent"/>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -19,11 +17,5 @@
         android:background="@color/red"
         android:title="@string/app_name"
         />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/hero"/>
 
 </RelativeLayout>

@@ -6,14 +6,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.List;
+
 import in.raveesh.materialmotion.parallax.R;
 import in.raveesh.materialmotion.resources.Movie;
 import in.raveesh.materialmotion.resources.MovieAdapter;
+import in.raveesh.materialmotion.resources.MovieHolder;
 import in.raveesh.materialmotion.resources.OnMovieClickListener;
+import in.raveesh.materialmotion.resources.ParallaxRecyclerAdapter;
 import in.raveesh.materialmotion.resources.Resources;
 
 
@@ -21,8 +26,6 @@ public class ParallaxActivity extends ActionBarActivity {
 
     RecyclerView recyclerView;
     Toolbar toolbar;
-    ImageView hero;
-    ViewGroup.LayoutParams heroParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,66 +38,55 @@ public class ParallaxActivity extends ActionBarActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    }
 
-        hero = (ImageView) findViewById(R.id.hero);
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        final Drawable toolbarBg = toolbar.getBackground();
+        toolbarBg.setAlpha(0);
+
+        final List<Movie> movies = Resources.getMovies(this);
+        ParallaxRecyclerAdapter<Movie> adapter = new ParallaxRecyclerAdapter<>(movies);
+        adapter.implementRecyclerAdapterMethods(new ParallaxRecyclerAdapter.RecyclerAdapterMethods() {
+            @Override
+            public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
+                ((MovieHolder)viewHolder).setMovie(movies.get(i), new OnMovieClickListener() {
+                    @Override
+                    public void onClick(Movie movie) {
+                        ImageActivity.launch(ParallaxActivity.this, movies.get(i));
+                    }
+                });
+            }
+
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+                return new MovieHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_with_name, viewGroup, false));
+            }
+
+            @Override
+            public int getItemCount() {
+                return movies.size();
+            }
+        });
+        View hero = LayoutInflater.from(this).inflate(R.layout.hero, recyclerView, false);
+        ViewGroup.LayoutParams params = hero.getLayoutParams();
+        params.height = (int)getResources().getDimension(R.dimen.hero_height);
+        hero.setLayoutParams(params);
         hero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ImageActivity.launch(ParallaxActivity.this, new Movie("Guardians of the Galaxy", getResources().getDrawable(R.drawable.guardians)));
             }
         });
-
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-
-        final Drawable toolbarBg = toolbar.getBackground();
-        toolbarBg.setAlpha(0);
-
-        MovieAdapter adapter = new MovieAdapter(Resources.getMovies(this), new OnMovieClickListener() {
+        adapter.setParallaxHeader(hero, recyclerView);
+        adapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
             @Override
-            public void onClick(Movie movie) {
-                ImageActivity.launch(ParallaxActivity.this, movie);
+            public void onParallaxScroll(float percentage, float offset, View parallax) {
+                toolbarBg.setAlpha((int)(percentage*255));
             }
         });
         recyclerView.setAdapter(adapter);
-
-        heroParams = hero.getLayoutParams();
-        final int heroHeight = heroParams.height;
-
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            int totalScroll = 0;
-            int initialHeight = heroParams.height;
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                totalScroll += dy;
-
-                int alpha = totalScroll/heroHeight * 255;
-                if (alpha > 255){
-                    alpha = 255;
-                }
-                else if (alpha < 0){
-                    alpha = 0;
-                }
-
-                toolbarBg.setAlpha(alpha);
-
-                if (totalScroll < heroHeight){
-                    heroParams.height = initialHeight - totalScroll;
-                    hero.setLayoutParams(heroParams);
-                }
-                else{
-                    super.onScrolled(recyclerView, dx, dy);
-                }
-            }
-        });
     }
 }
