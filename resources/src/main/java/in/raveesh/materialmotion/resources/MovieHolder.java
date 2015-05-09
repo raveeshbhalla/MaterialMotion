@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class MovieHolder extends RecyclerView.ViewHolder{
 
-    private ImageView imageView;
+    public ImageView imageView;
     private TextView textView;
     private View root;
 

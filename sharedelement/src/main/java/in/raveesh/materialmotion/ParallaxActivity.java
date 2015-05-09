@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -50,10 +51,11 @@ public class ParallaxActivity extends ActionBarActivity {
         adapter.implementRecyclerAdapterMethods(new ParallaxRecyclerAdapter.RecyclerAdapterMethods() {
             @Override
             public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
-                ((MovieHolder)viewHolder).setMovie(movies.get(i), new OnMovieClickListener() {
+                final MovieHolder holder = (MovieHolder)viewHolder;
+                holder.setMovie(movies.get(i), new OnMovieClickListener() {
                     @Override
-                    public void onClick(Movie movie) {
-                        ImageActivity.launch(ParallaxActivity.this, movies.get(i));
+                    public void onClick(ImageView poster, Movie movie) {
+                        ImageActivity.launch(ParallaxActivity.this, holder.imageView, movies.get(i));
                     }
                 });
             }
@@ -68,14 +70,15 @@ public class ParallaxActivity extends ActionBarActivity {
                 return movies.size();
             }
         });
-        View hero = LayoutInflater.from(this).inflate(R.layout.hero, recyclerView, false);
+        final View hero = LayoutInflater.from(this).inflate(R.layout.hero, recyclerView, false);
         ViewGroup.LayoutParams params = hero.getLayoutParams();
         params.height = (int)getResources().getDimension(R.dimen.hero_height);
         hero.setLayoutParams(params);
         hero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageActivity.launch(ParallaxActivity.this, new Movie("Guardians of the Galaxy", getResources().getDrawable(R.drawable.guardians)));
+                ImageActivity.launch(ParallaxActivity.this, (ImageView)hero.findViewById(R.id.poster),
+                        new Movie("Guardians of the Galaxy", getResources().getDrawable(R.drawable.guardians)));
             }
         });
         adapter.setParallaxHeader(hero, recyclerView);

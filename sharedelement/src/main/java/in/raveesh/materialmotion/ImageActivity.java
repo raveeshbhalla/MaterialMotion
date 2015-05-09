@@ -16,7 +16,7 @@ import in.raveesh.materialmotion.sharedelement.R;
 
 public class ImageActivity extends ActionBarActivity {
 
-    public static void launch(Context context, Movie movie){
+    public static void launch(Context context, ImageView poster, Movie movie){
         Intent intent = new Intent(context, ImageActivity.class);
         intent.putExtra("movie", movie.NAME);
         context.startActivity(intent);
