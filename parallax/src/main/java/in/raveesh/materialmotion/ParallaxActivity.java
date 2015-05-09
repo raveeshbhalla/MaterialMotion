@@ -54,7 +54,7 @@ public class ParallaxActivity extends ActionBarActivity {
             public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
                 ((MovieHolder)viewHolder).setMovie(movies.get(i), new OnMovieClickListener() {
                     @Override
-                    public void onClick(Movie movie) {
+                    public void onClick(ImageView poster, Movie movie) {
                         ImageActivity.launch(ParallaxActivity.this, movies.get(i));
                     }
                 });
