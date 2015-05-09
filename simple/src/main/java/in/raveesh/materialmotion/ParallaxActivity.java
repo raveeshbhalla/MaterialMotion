@@ -34,7 +34,7 @@ public class ParallaxActivity extends ActionBarActivity {
 
         MovieAdapter adapter = new MovieAdapter(Resources.getMovies(this), new OnMovieClickListener() {
             @Override
-            public void onClick(Movie movie) {
+            public void onClick(ImageView poster, Movie movie) {
                 ImageActivity.launch(ParallaxActivity.this, movie);
             }
         });
