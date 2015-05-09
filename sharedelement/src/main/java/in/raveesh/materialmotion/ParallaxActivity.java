@@ -13,13 +13,12 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import in.raveesh.materialmotion.parallax.R;
 import in.raveesh.materialmotion.resources.Movie;
-import in.raveesh.materialmotion.resources.MovieAdapter;
 import in.raveesh.materialmotion.resources.MovieHolder;
 import in.raveesh.materialmotion.resources.OnMovieClickListener;
 import in.raveesh.materialmotion.resources.ParallaxRecyclerAdapter;
 import in.raveesh.materialmotion.resources.Resources;
+import in.raveesh.materialmotion.sharedelement.R;
 
 
 public class ParallaxActivity extends ActionBarActivity {
@@ -52,10 +51,11 @@ public class ParallaxActivity extends ActionBarActivity {
         adapter.implementRecyclerAdapterMethods(new ParallaxRecyclerAdapter.RecyclerAdapterMethods() {
             @Override
             public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
-                ((MovieHolder)viewHolder).setMovie(movies.get(i), new OnMovieClickListener() {
+                final MovieHolder holder = (MovieHolder)viewHolder;
+                holder.setMovie(movies.get(i), new OnMovieClickListener() {
                     @Override
                     public void onClick(ImageView poster, Movie movie) {
-                        ImageActivity.launch(ParallaxActivity.this, movies.get(i));
+                        ImageActivity.launch(ParallaxActivity.this, holder.imageView, movies.get(i));
                     }
                 });
             }
@@ -70,14 +70,15 @@ public class ParallaxActivity extends ActionBarActivity {
                 return movies.size();
             }
         });
-        View hero = LayoutInflater.from(this).inflate(R.layout.hero, recyclerView, false);
+        final View hero = LayoutInflater.from(this).inflate(R.layout.hero, recyclerView, false);
         ViewGroup.LayoutParams params = hero.getLayoutParams();
         params.height = (int)getResources().getDimension(R.dimen.hero_height);
         hero.setLayoutParams(params);
         hero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageActivity.launch(ParallaxActivity.this, new Movie("Guardians of the Galaxy", getResources().getDrawable(R.drawable.guardians)));
+                ImageActivity.launch(ParallaxActivity.this, (ImageView)hero.findViewById(R.id.poster),
+                        new Movie("Guardians of the Galaxy", getResources().getDrawable(R.drawable.guardians)));
             }
         });
         adapter.setParallaxHeader(hero, recyclerView);

@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.raveesh.materialmotion.ImageActivity"
+    android:background="#000000">
+
+    <ImageView
+        android:id="@+id/poster"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:src="@drawable/guardians"
+        android:transitionName="poster"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Guardians of the Galaxy"
+        android:textColor="@color/primary_material_light"
+        android:layout_margin="@dimen/name_margin"/>
+</RelativeLayout>

@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class MovieHolder extends RecyclerView.ViewHolder{
 
-    private ImageView imageView;
+    public ImageView imageView;
     private TextView textView;
     private View root;
 
@@ -25,7 +25,7 @@ public class MovieHolder extends RecyclerView.ViewHolder{
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onMovieClickListener.onClick(movie);
+                onMovieClickListener.onClick(imageView, movie);
             }
         });
     }
