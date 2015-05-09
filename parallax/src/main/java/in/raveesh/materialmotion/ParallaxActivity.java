@@ -22,6 +22,7 @@ public class ParallaxActivity extends ActionBarActivity {
     RecyclerView recyclerView;
     Toolbar toolbar;
     ImageView hero;
+    ViewGroup.LayoutParams heroParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +61,12 @@ public class ParallaxActivity extends ActionBarActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        ViewGroup.LayoutParams params = hero.getLayoutParams();
-        final int heroHeight = params.height;
+        heroParams = hero.getLayoutParams();
+        final int heroHeight = heroParams.height;
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             int totalScroll = 0;
+            int initialHeight = heroParams.height;
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -73,8 +75,6 @@ public class ParallaxActivity extends ActionBarActivity {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
                 totalScroll += dy;
 
                 int alpha = totalScroll/heroHeight * 255;
@@ -86,6 +86,14 @@ public class ParallaxActivity extends ActionBarActivity {
                 }
 
                 toolbarBg.setAlpha(alpha);
+
+                if (totalScroll < heroHeight){
+                    heroParams.height = initialHeight - totalScroll;
+                    hero.setLayoutParams(heroParams);
+                }
+                else{
+                    super.onScrolled(recyclerView, dx, dy);
+                }
             }
         });
     }
